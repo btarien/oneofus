@@ -32,3 +32,17 @@ document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
 });
+
+function moveAnswer(elem) {
+  console.log("hello");
+  elem.style.position ='absolute';
+  elem.style.top = Math.floor(Math.random()*100)+'%';
+  elem.style.left = Math.floor(Math.random()*100)+'%';
+}
+
+const answers = document.querySelectorAll("[data-move]")
+answers.forEach(answer => {
+  if (answer.dataset.move == "true") {
+    answer.addEventListener("mouseenter", e => moveAnswer(e.target));
+  }
+});
