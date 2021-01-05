@@ -1,11 +1,15 @@
 <div class="container">
-  <h1>Question #<%= @question.id %> </h1>
-  <p><%= @question.content %></p>
-  <% @question.answers.each do |answer| %>
-    <%= link_to do %>
-      <div class="answer-card" data-move=<%= !answer.correct %>>
-        <p><%= answer.content %></p>
-      </div>
-    <% end %>
-  <% end %>
+  <div class="game-container">
+    <h1 class="text-center">Question #<%= @question.id %> </h1>
+    <p class="text-center"><%= @question.content %></p>
+    <div class="position-relative d-flex" style="height: 75%;">
+      <% @question.answers.each do |answer| %>
+        <%= link_to root_path, style: "border: 5px solid aqua;" do %>
+          <div class="answer-card" data-move=<%= !answer.correct %>>
+            <p><%= answer.content %></p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
