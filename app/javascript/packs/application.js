@@ -29,19 +29,16 @@ import "bootstrap";
 // import { initSelect2 } from '../components/init_select2';
 
 document.addEventListener('turbolinks:load', () => {
-  // Call your functions here, e.g:
-  // initSelect2();
-});
-
-function moveAnswer(elem) {
-  elem.style.position ='absolute';
-  elem.style.top = Math.floor(Math.random() * 90 + 5)+'%';
-  elem.style.left = Math.floor(Math.random() * 90 + 5)+'%';
-}
-
-const answers = document.querySelectorAll("[data-move]")
-answers.forEach(answer => {
-  if (answer.dataset.move == "true") {
-    answer.addEventListener("mouseenter", e => moveAnswer(e.target));
+  function moveAnswer(elem) {
+    elem.style.position ='absolute';
+    elem.style.top = Math.floor(Math.random() * 90 + 5)+'%';
+    elem.style.left = Math.floor(Math.random() * 90 + 5)+'%';
   }
+  
+  const answers = document.querySelectorAll("[data-move]")
+  answers.forEach(answer => {
+    if (answer.dataset.move == "true") {
+      answer.addEventListener("mouseover", e => moveAnswer(e.currentTarget));
+    }
+  });
 });
