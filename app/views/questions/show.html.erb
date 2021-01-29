@@ -3,7 +3,7 @@
     <h1 class="text-center"> Question #<%= @question.id %> </h1>
     <p class="text-center"><%= @question.content %></p>
     <div class="position-relative d-flex justify-content-center" style="height: 75%;">
-      <% @question.answers.each do |answer| %>
+      <% @answers.each do |answer| %>
         <%= link_to question_answer_results_path(@question, answer), class: "answer-card", data: {move: answer.move}, method: :post do %>
           <div>
             <p><%= answer.content %></p>
