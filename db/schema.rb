@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_05_083918) do
+ActiveRecord::Schema.define(version: 2021_01_29_080237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2021_01_05_083918) do
   create_table "answers", force: :cascade do |t|
     t.string "content"
     t.boolean "correct"
+    t.boolean "move"
     t.bigint "question_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -26,9 +27,23 @@ ActiveRecord::Schema.define(version: 2021_01_05_083918) do
 
   create_table "questions", force: :cascade do |t|
     t.string "content"
+    t.bigint "answer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["answer_id"], name: "index_questions_on_answer_id"
+  end
+
+  create_table "results", force: :cascade do |t|
+    t.bigint "question_id", null: false
+    t.bigint "answer_id", null: false
+    t.boolean "correct"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["answer_id"], name: "index_results_on_answer_id"
+    t.index ["question_id"], name: "index_results_on_question_id"
   end
 
   add_foreign_key "answers", "questions"
+  add_foreign_key "results", "answers"
+  add_foreign_key "results", "questions"
 end

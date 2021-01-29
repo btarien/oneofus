@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="game-container" style="height: 75%;">
+    <h1 class="text-center mt-4"> Results </h1>
+    <h2><%= @score %>/<%= @total %></h2>
+    <% @results.each do |result| %>
+      <%= result.question.content %>
+      <ul style='list-style-type: none;'>
+        <% result.question.answers.each do |answer| %>
+          <% if result.correct %>
+            <% if result.answer == answer %>
+              <li class='text-success d-table my-1'><i class="fas fa-check mr-2"></i><%= answer.content %></li>
+            <% else %>
+              <li class='text-dark d-table my-1'><%= answer.content %></li>
+            <% end %>
+          <% else %>
+            <% if result.answer == answer %>
+              <li class='text-danger d-table my-1'><i class="fas fa-times mr-2"></i><%= answer.content %></li>
+            <% elsif answer.correct %>
+              <li class='text-secondary d-table my-1'><i class="fas fa-check mr-2"></i><%= answer.content %></li>
+            <% else %>
+              <li><%= answer.content %></li>
+            <% end %>
+          <% end %>
+        <% end %>
+      </ul>
+    <% end %>
+    <div class="d-flex justify-content-center">
+      <%= link_to 'Try Again', root_path, class: "btn btn-primary w-100 my-4" %>
+    </div>
+  </div>
+</div>

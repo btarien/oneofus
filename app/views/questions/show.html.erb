@@ -1,11 +1,11 @@
 <div class="container">
   <div class="game-container">
-    <h1 class="text-center">Question #<%= @question.id %> </h1>
+    <h1 class="text-center"> Question #<%= @question.id %> </h1>
     <p class="text-center"><%= @question.content %></p>
     <div class="position-relative d-flex" style="height: 75%;">
       <% @question.answers.each do |answer| %>
-        <%= link_to root_path, style: "border: 5px solid aqua;" do %>
-          <div class="answer-card" data-move=<%= !answer.correct %>>
+        <%= link_to question_answer_results_path( @question, answer), method: :post do %>
+          <div class="answer-card" data-move=<%= answer.move %>>
             <p><%= answer.content %></p>
           </div>
         <% end %>
